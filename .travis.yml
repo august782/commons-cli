@@ -23,8 +23,14 @@ jdk:
 
 script:
   - mvn -V --no-transfer-progress
-  - ./.travis/pom-modify/modify-project.sh .
-  - mvn org.pitest:pitest-maven:mutationCoverage -Drat.skip -Dcheckstyle.skip
+
+jobs:
+  include:
+    - stage: mutation-testing
+      jdk: openjdk8
+      script:
+        - ./.travis/pom-modify/modify-project.sh .
+        - mvn org.pitest:pitest-maven:mutationCoverage -Drat.skip -Dcheckstyle.skip
 
 after_success:
   - mvn clean test jacoco:report coveralls:report -Ptravis-jacoco --no-transfer-progress
