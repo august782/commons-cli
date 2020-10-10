@@ -203,6 +203,7 @@
         <configuration>
           <excludes>
             <exclude>.travis/pom-modify/*</exclude>
+            <exclude>pit-report/*</exclude>
           </excludes>
         </configuration>
       </plugin>
